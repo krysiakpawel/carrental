@@ -1,6 +1,6 @@
 package org.rental.price;
 
-public class Price {
+public abstract class Price {
 
     private int ammount;
     private String currency;

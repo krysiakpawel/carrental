@@ -13,4 +13,8 @@ public abstract class Customer {
         this.lastName = lastName;
         this.email = email;
     }
+    public String beAnnoying(){
+        return "Im here waiting for an hour";
+    }
+
 }

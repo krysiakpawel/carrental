@@ -6,12 +6,15 @@ import org.rental.price.Price;
 import org.rental.vehicle.VehicleTemp;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.sql.SQLOutput;
+
 @SpringBootApplication
 public class Main {
 
     public static void main(String[] args) {
 
         System.out.println("Test test");
+        System.out.println("SJATAFAKAP");
 
     }
 }

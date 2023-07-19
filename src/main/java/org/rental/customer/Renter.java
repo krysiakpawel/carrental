@@ -1,30 +1,37 @@
 package org.rental.customer;
 
-public class Renter extends Customer{
+public class Renter extends Customer {
 
     private final int id;
     private static int customerCount;
-    private String name;
-    private String lastname;
+    private String email;
     private long phoneNumber;
+    private String passportNumber;
 
-    public Renter(String name, String lastname){
-        this.name = name;
-        this.lastname = lastname;
+    public Renter(String firstName, String lastName, String email, long phoneNumber, String passportNumber) {
+        super(firstName, lastName, email);
+        this.phoneNumber = phoneNumber;
+        this.passportNumber = passportNumber;
         this.id = ++customerCount;
     }
-
-    public String getName() {
-        return name;
+    public String getFirstName(){
+        return super.getFirstName();
     }
-    public void setName(String name){
-        this.name = name;
+    //check in main class if this works pls!
+    public void setFirstName(String firstName) {
+        super.setFistName(firstName);
     }
-
-    public String getLastname() {
-        return lastname;
+    public String getLastName(){
+        return  super.getLastName();
     }
     public void setLastName(String lastName){
-        this.lastname = lastName;
+        super.setLastName(lastName);
     }
+
+
+
+
 }
+
+
+

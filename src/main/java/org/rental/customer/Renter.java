@@ -28,7 +28,8 @@ public class Renter extends Customer {
         super.setLastName(lastName);
     }
 
-
+    //Add age, and age validation, if younger than XX, you cannot rent a car.
+    //Or add Date birthday and automatic age calculation with age validation .
 
 
 }

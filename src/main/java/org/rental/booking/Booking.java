@@ -16,12 +16,22 @@ public class Booking {
     private Price price;
     private Date startingDate;
     private Date endingDate;
+    private boolean bookingWasOpened;
+    private boolean bookingIsClosed;
+    private boolean bookingIsRunning;
+    private int startingMileage;
+    private int endingMileage;
 
     public Booking (Customer renter, Customer driver, Vehicle vehicle) {
         this.renter = renter;
         this.driver = driver;
         this.vehicle = vehicle;
         this.bookingNumber = ++bookingCount;
+        this.bookingWasOpened = false;
+        this.bookingIsClosed = false;
+        this.bookingIsRunning = false;
+        this.startingMileage = 0;
+        this.endingMileage = 0;
     }
 
     public int getBookingNumber(){
@@ -69,15 +79,43 @@ public class Booking {
     public void setEndingDate(Date endingDate){
         this.endingDate = endingDate;
     }
-
-
+    public boolean getBookingWasOpened(){
+        return bookingWasOpened;
+    }
+    public void setBookingWasOpened(boolean wasOpened){
+        this.bookingWasOpened = wasOpened;
+    }
+    public boolean getBookingIsClosed(){
+        return bookingIsClosed;
+    }
+    public void setBookingIsClosed(boolean bookingIsClosed){
+        this.bookingIsClosed = bookingIsClosed;
+    }
+    public boolean getBookingIsRunning(){
+        return bookingIsRunning;
+    }
+    public void setBookingIsRunning(boolean bookingIsRunning){
+        this.bookingIsRunning = bookingIsRunning;
+    }
+    public int getStartingMileage(){
+        return startingMileage;
+    }
+     public void setStartingMileage(int startingMileage){
+        this.startingMileage = startingMileage;
+     }
+     public int getEndingMileage(){
+        return endingMileage;
+     }
+     public void setEndingMileage(int endingMileage){
+        this.endingMileage = endingMileage;
+     }
 
     public String toString(){
-        return "Booking number: " + bookingNumber + "\n" +
+        return "Booking number #" + bookingNumber + "\n" +
                 "Renter: " + renter.getFirstName() + " " + renter.getLastName() + "\n" +
                 "Driver: " + driver.getFirstName() + " " + driver.getLastName() + "\n" +
                 "Vehicle: " + vehicle.getModel() + " " + vehicle.getMake() + " " + vehicle.getLicenseNumber();
-                // + "Price for booking " + price.getAmmount() + " " + price.getCurrency();
+                // + "Price for booking " + price.getAmount() + " " + price.getCurrency();
     }
 
 

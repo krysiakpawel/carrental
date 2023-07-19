@@ -37,5 +37,17 @@ public class Main {
         System.out.println(booking3.toString() + "\n");
         System.out.println(booking4.toString() + "\n");
 
+        bookingService.openBooking(booking1);
+        System.out.println(booking1.getStartingMileage());
+        bookingService.closeBooking(booking1, 1210);
+        System.out.println(booking1.getEndingMileage());
+        bookingService.closeBooking(booking1, 10);
+        System.out.println(booking1.getEndingMileage());
+        bookingService.openBooking(booking1);
+        bookingService.openBooking(booking4);
+        System.out.println(vehicle1.getMileage());
+        System.out.println(booking4.getStartingMileage());
+        bookingService.closeBooking(booking4,1847);
+        System.out.println(vehicle1.getMileage());
     }
 }

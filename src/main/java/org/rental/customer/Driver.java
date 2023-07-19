@@ -10,4 +10,7 @@ public class Driver extends Customer{
         this.drivingLicenseNumber = drivingLicenseNumber;
         this.age = age;
     }
+
+    //Add age, and age validation, if younger than XX, you cannot drive a car.
+    //Or add Date birthday and automatic age calculation with age validation .
 }

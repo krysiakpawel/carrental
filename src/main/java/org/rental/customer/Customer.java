@@ -1,6 +1,5 @@
 package org.rental.customer;
 
-import java.util.Date;
 
 public abstract class Customer {
 
@@ -13,8 +12,27 @@ public abstract class Customer {
         this.lastName = lastName;
         this.email = email;
     }
-    public String beAnnoying(){
-        return "Im here waiting for an hour";
+
+    public String getFirstName(){
+        return firstName;
+    }
+    public void setFistName(String firstName){
+        this.firstName = firstName;
+    }
+    public String getLastName(){
+        return lastName;
+    }
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
+    public String getEmail(){
+        return email;
+    }
+    public void setEmail(String email){
+        this.email = email;
     }
 
+    public void sendEmail() {
+
+    }
 }

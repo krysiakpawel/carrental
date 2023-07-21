@@ -8,6 +8,7 @@ import org.rental.customer.Renter;
 import org.rental.vehicle.SmallVehicle;
 import org.rental.vehicle.Vehicle;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.rental.workshop.WorkshopService;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class Main {
         //Create logger later (for remembering)
         System.out.println("LOG INFO: Starting program" + "\n");
         BookingService bookingService = new BookingService();
+        WorkshopService workshopService = new WorkshopService();
         
         // Do przemyslenia czy tworzyc najpierw customer a potem przypisac mu wartosc czy wynajmujacy czy kierowca, czy tworzyc osobno wynajmujacy i osobno kierowca
         Customer renter1 = new Renter("John", "Smith", "jsmith@abc.xy", 123456789, "ABC12345");
@@ -49,10 +51,11 @@ public class Main {
 
 
 
-    /*
+
         bookingService.openBooking(booking1);
-        bookingService.closeBooking(booking1,1241);
-    */
+        //System.out.println(workshopService.checkIfCarNeedsOil(vehicle1));
+        bookingService.closeBooking(booking1,7300);
+
 
     }
 }

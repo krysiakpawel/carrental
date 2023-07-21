@@ -39,7 +39,7 @@ public class BookingService {
             System.out.println("INFO: Can not close Booking #"  + booking.getBookingNumber() + ". Booking #" + booking.getBookingNumber() + " is already closed");
         } else {
             booking.setEndingMileage(Math.max(booking.getStartingMileage(),mileage));
-            workshopService.checkIfCarNeedsOil(booking.getVehicle());
+            System.out.println(workshopService.checkIfCarNeedsOil(booking.getVehicle()));
             booking.setBookingIsRunning(false);
             booking.setBookingIsClosed(true);
             booking.getVehicle().setMileage(Math.max(booking.getStartingMileage(),mileage));

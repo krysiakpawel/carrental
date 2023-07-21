@@ -6,13 +6,12 @@ public class WorkshopService {
 
 
 
-    public void checkIfCarNeedsOil(Vehicle vehicle){
+    public void checkIfCarNeedsOil(Vehicle vehicle){}
 
+    public void startOilChange(){}
 
+    public void endOilChange(){}
 
-
-
-    }
 
 
 

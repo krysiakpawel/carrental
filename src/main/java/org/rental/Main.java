@@ -22,7 +22,7 @@ public class Main {
         //Create logger later (for remembering)
         System.out.println("LOG INFO: Starting program" + "\n");
         BookingService bookingService = new BookingService();
-        WorkshopService workshopService = new WorkshopService();
+        WorkshopService workshopService = new WorkshopService()
         
         // Do przemyslenia czy tworzyc najpierw customer a potem przypisac mu wartosc czy wynajmujacy czy kierowca, czy tworzyc osobno wynajmujacy i osobno kierowca
         Customer renter1 = new Renter("John", "Smith", "jsmith@abc.xy", 123456789, "ABC12345");
@@ -31,9 +31,11 @@ public class Main {
         Booking booking1 = bookingService.createNewBooking(renter1,driver1);
         bookingService.addVehicleToBooking(booking1,vehicle1);
         bookingService.modifyPickUpDate(booking1, LocalDate.parse("2023-07-24"));
-        bookingService.modifyReturnDate(booking1, LocalDate.parse("2023-07-26"));
+         bookingService.modifyReturnDate(booking1, LocalDate.parse("2023-07-26"));
+        bookingService.modifyReturnDate(booking1, LocalDate.parse("2023-07-25"));
         System.out.println(booking1.toString());
         System.out.println(bookingService.countTotalDays(booking1));
+
 
 
 
@@ -55,6 +57,12 @@ public class Main {
         bookingService.openBooking(booking1);
         //System.out.println(workshopService.checkIfCarNeedsOil(vehicle1));
         bookingService.closeBooking(booking1,7300);
+
+
+    /*
+        bookingService.openBooking(booking1);
+        bookingService.closeBooking(booking1,1241);
+    */
 
 
     }

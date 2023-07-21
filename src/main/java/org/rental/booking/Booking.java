@@ -126,7 +126,6 @@ public class Booking {
                 "Pick-up date: " + getStartingDate() + "\n" +
                 "Return date: " + getReturnDate() + "\n";
 
-
     }
 
 

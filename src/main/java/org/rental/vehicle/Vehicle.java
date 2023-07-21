@@ -33,10 +33,23 @@ public abstract class Vehicle {
     }
     public String getMake(){
         return make;
-     }
+    }
+
+    public int getOilInterval() {
+         return oilInterval;
+    }
+    public void setOilInterval(int oilInterval) {
+        this.oilInterval = oilInterval;
+    }
+  
+    public void setMake(String make){
+        this.make = make;
+    }
+
     public void setMake(String make){
         this.make = make;
      }
+
      public int getMileage(){
         return mileage;
      }

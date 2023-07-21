@@ -5,6 +5,9 @@ import org.rental.customer.Renter;
 import org.rental.extrases.Extras;
 import org.rental.price.Price;
 import org.rental.vehicle.Vehicle;
+import org.rental.workshop.WorkshopService;
+
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,10 +29,13 @@ public class BookingService {
     }
     public void closeBooking(Booking booking, int mileage){
 
+        WorkshopService workshopService = new WorkshopService();
+
         if(booking.getBookingIsClosed()){
             System.out.println("LOG: Can not close Booking #"  + booking.getBookingNumber() + ". Booking #" + booking.getBookingNumber() + " is already closed");
         } else {
             booking.setEndingMileage(Math.max(booking.getStartingMileage(),mileage));
+            workshopService.checkIfCarNeedsOil(booking.getVehicle());
             booking.setBookingIsRunning(false);
             booking.setBookingIsClosed(true);
             booking.getVehicle().setMileage(Math.max(booking.getStartingMileage(),mileage));
@@ -39,15 +45,6 @@ public class BookingService {
     public Booking createNewBooking(Customer renter, Customer driver, Vehicle vehicle) {
         return new Booking(renter, driver, vehicle);
     }
-
-
-
-
-
-
-
-
-
 
 
     public void modifyDates(Booking booking) {

@@ -1,9 +1,12 @@
 package org.rental.booking;
 
+
 import org.rental.customer.Customer;
 import org.rental.price.Price;
 import org.rental.vehicle.Vehicle;
+
 import java.util.Date;
+
 
 public class Booking {
 
@@ -21,6 +24,7 @@ public class Booking {
     private boolean bookingIsRunning;
     private int startingMileage;
     private int endingMileage;
+    private Long id;
 
     public Booking (Customer renter, Customer driver, Vehicle vehicle) {
         this.renter = renter;
@@ -119,4 +123,11 @@ public class Booking {
     }
 
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

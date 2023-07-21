@@ -9,9 +9,6 @@ import org.rental.vehicle.SmallVehicle;
 import org.rental.vehicle.Vehicle;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.swing.plaf.basic.BasicBorders;
-import java.awt.print.Book;
-
 @SpringBootApplication
 public class Main {
 
@@ -49,5 +46,15 @@ public class Main {
         System.out.println(booking4.getStartingMileage());
         bookingService.closeBooking(booking4,1847);
         System.out.println(vehicle1.getMileage());
+        Booking booking5 = bookingService.createNewBooking(renter1, driver1, vehicle1);
+        bookingService.openBooking(booking5);
+        System.out.println(booking5.getStartingMileage());
+        bookingService.closeBooking(booking5, 2459);
+        System.out.println(vehicle1.getMileage());
+        Booking booking6 = bookingService.createNewBooking(renter2, driver1, vehicle1);
+        bookingService.openBooking(booking6);
+        bookingService.closeBooking(booking6, 3528);
+        System.out.println(vehicle1.getMileage());
+        bookingService.openBooking(booking6);
     }
 }

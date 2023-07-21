@@ -12,7 +12,7 @@ public abstract class Vehicle {
     private String make;
     private int mileage;
     private String licenseNumber;
-    private int oilInterval = 7500;
+    private int oilInterval = 10000;
 
     public Vehicle(String model, String make, String licenseNumber){
         this.id = ++vehicleCount;
@@ -45,10 +45,6 @@ public abstract class Vehicle {
     public void setMake(String make){
         this.make = make;
     }
-
-    public void setMake(String make){
-        this.make = make;
-     }
 
      public int getMileage(){
         return mileage;

@@ -6,23 +6,13 @@ public class WorkshopService {
 
 Vehicle vehicle;
 
-
     public boolean checkIfCarNeedsOil(Vehicle vehicle) {
-        if ((vehicle.getMileage()) - ((vehicle.getOilInterval()) * (vehicle.getMileage() / vehicle.getOilInterval())) < 1000) {
-            return true;
-        } else {
-            return false;
-        }
+        return ((vehicle.getOilInterval()) - ((vehicle.getMileage()) - ((vehicle.getMileage() / vehicle.getOilInterval()) * vehicle.getOilInterval()))) <= 1000;
     }
+
     public void startOilChange(){
 
     }
-
-
-    public void checkIfCarNeedsOil(Vehicle vehicle){}
-
-    public void startOilChange(){}
-
 
     public void endOilChange(){}
 

@@ -1,13 +1,18 @@
 package org.rental.vehicle;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public abstract class Vehicle {
 
-    private final int id;
+
+    private int id;
     private static int vehicleCount;
     private String model;
     private String make;
     private int mileage;
     private String licenseNumber;
+    private int oilInterval = 7500;
 
     public Vehicle(String model, String make, String licenseNumber){
         this.id = ++vehicleCount;

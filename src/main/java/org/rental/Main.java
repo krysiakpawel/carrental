@@ -29,7 +29,7 @@ public class Main {
         Booking booking1 = bookingService.createNewBooking(renter1,driver1);
         bookingService.addVehicleToBooking(booking1,vehicle1);
         bookingService.modifyPickUpDate(booking1, LocalDate.parse("2023-07-24"));
-        bookingService.modifyReturnDate(booking1, LocalDate.parse("2023-07-26"));
+        bookingService.modifyReturnDate(booking1, LocalDate.parse("2023-07-25"));
         System.out.println(booking1.toString());
         System.out.println(bookingService.countTotalDays(booking1));
 

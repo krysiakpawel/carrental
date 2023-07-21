@@ -1,5 +1,6 @@
 package org.rental.booking;
 
+import com.google.common.math.IntMath;
 import org.rental.customer.Customer;
 import org.rental.customer.Renter;
 import org.rental.extrases.Extras;
@@ -7,14 +8,11 @@ import org.rental.price.Price;
 import org.rental.vehicle.Vehicle;
 import org.rental.workshop.WorkshopService;
 
-
-import org.springframework.stereotype.Service;
-
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.math.*;
 
-@Service
 public class BookingService {
 
     // add try & catch and LOGGER
@@ -55,28 +53,23 @@ public class BookingService {
     public void modifyPickUpDate(Booking booking, LocalDate date) {
         booking.setStartingDate(date);
     }
-
     public void modifyReturnDate(Booking booking, LocalDate date) {
         booking.setReturnDate(date);
     }
-
-    public Duration countTotalDays(Booking booking){
-
-
+    public int countTotalDays(Booking booking){
         LocalDateTime pickUpDateTime = LocalDateTime.of(booking.getStartingDate().getYear(), booking.getStartingDate().getMonth(),
-                                                        booking.getStartingDate().getDayOfMonth(), 0, 0,0);
+                                                        booking.getStartingDate().getDayOfMonth(), 12, 0,0);
         LocalDateTime returnDateTime = LocalDateTime.of(booking.getReturnDate().getYear(), booking.getReturnDate().getMonth(),
-                                                        booking.getReturnDate().getDayOfMonth(), 0, 0, 0);
-
-        Duration duration = Duration.between(pickUpDateTime, returnDateTime);
-
-        return duration;
-
-
-
-
-
+                                                        booking.getReturnDate().getDayOfMonth(), 12, 0, 0);
+        return IntMath.divide((int) Duration.between(pickUpDateTime, returnDateTime).toHours(), 24, RoundingMode.CEILING );
     }
+
+
+
+
+
+
+
 
     public void modifyPrice(Booking booking, Price price){
     }

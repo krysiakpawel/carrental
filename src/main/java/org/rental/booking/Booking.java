@@ -5,11 +5,13 @@ import org.rental.customer.Customer;
 import org.rental.price.Price;
 import org.rental.vehicle.Vehicle;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 public class Booking {
 
+    BookingService bookingService;
     private static int bookingCount;
     private final int bookingNumber;
     private Customer renter;
@@ -17,8 +19,11 @@ public class Booking {
     private Customer extraDriver;
     private Vehicle vehicle;
     private Price price;
-    private Date startingDate;
-    private Date endingDate;
+    private LocalDate startingDate;
+    private LocalTime startingTime;
+    private LocalDate returnDate;
+    private LocalTime returnTime;
+    //private LocalDate openingDate;
     private boolean bookingWasOpened;
     private boolean bookingIsClosed;
     private boolean bookingIsRunning;
@@ -26,10 +31,9 @@ public class Booking {
     private int endingMileage;
     private Long id;
 
-    public Booking (Customer renter, Customer driver, Vehicle vehicle) {
+    public Booking (Customer renter, Customer driver) {
         this.renter = renter;
         this.driver = driver;
-        this.vehicle = vehicle;
         this.bookingNumber = ++bookingCount;
         this.bookingWasOpened = false;
         this.bookingIsClosed = false;
@@ -71,17 +75,17 @@ public class Booking {
     public void setPrice(Price price){
         this.price = price;
     }
-    public Date getStartingDate(){
+    public LocalDate getStartingDate(){
         return startingDate;
     }
-    public void setStartingDate(Date startingDate){
+    public void setStartingDate(LocalDate startingDate){
         this.startingDate = startingDate;
     }
-    public Date getEndingDate(){
-        return endingDate;
+    public LocalDate getReturnDate(){
+        return returnDate;
     }
-    public void setEndingDate(Date endingDate){
-        this.endingDate = endingDate;
+    public void setReturnDate(LocalDate returnDate){
+        this.returnDate = returnDate;
     }
     public boolean getBookingWasOpened(){
         return bookingWasOpened;
@@ -118,8 +122,10 @@ public class Booking {
         return "Booking number #" + bookingNumber + "\n" +
                 "Renter: " + renter.getFirstName() + " " + renter.getLastName() + "\n" +
                 "Driver: " + driver.getFirstName() + " " + driver.getLastName() + "\n" +
-                "Vehicle: " + vehicle.getModel() + " " + vehicle.getMake() + " " + vehicle.getLicenseNumber();
-                // + "Price for booking " + price.getAmount() + " " + price.getCurrency();
+                "Vehicle: " + vehicle.getModel() + " " + vehicle.getMake() + " " + vehicle.getLicenseNumber() + "\n" +
+                "Pick-up date: " + getStartingDate() + "\n" +
+                "Return date: " + getReturnDate() + "\n";
+
     }
 
 

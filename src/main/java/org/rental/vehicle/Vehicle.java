@@ -55,7 +55,8 @@ public abstract class Vehicle {
         this.licenseNumber = licenseNumber;
     }
     public String toString(){
-        return getModel() + " " + getMake() + "\n"
-                + "Mileage: " + getMileage();
+        return "Model: " + getModel() + " " + getMake() + "\n"
+                + "Mileage: " + getMileage() + "\n"
+                + "License number: " + getLicenseNumber();
     }
 }

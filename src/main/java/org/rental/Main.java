@@ -7,18 +7,25 @@ import org.rental.customer.Driver;
 import org.rental.customer.Renter;
 import org.rental.vehicle.SmallVehicle;
 import org.rental.vehicle.Vehicle;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.rental.workshop.WorkshopService;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @SpringBootApplication
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
+        SpringApplication.run(Main.class, args);
+
+    /*
         //Create logger later (for remembering)
         System.out.println("LOG INFO: Starting program" + "\n");
         BookingService bookingService = new BookingService();
@@ -31,16 +38,14 @@ public class Main {
         Booking booking1 = bookingService.createNewBooking(renter1,driver1);
         bookingService.addVehicleToBooking(booking1,vehicle1);
         bookingService.modifyPickUpDate(booking1, LocalDate.parse("2023-07-24"));
-         bookingService.modifyReturnDate(booking1, LocalDate.parse("2023-07-26"));
-        bookingService.modifyReturnDate(booking1, LocalDate.parse("2023-07-25"));
+        bookingService.modifyReturnDate(booking1, LocalDate.parse("2023-07-26"));
+        booking1.setStartingTime(LocalTime.parse("10:30:00"));
+        booking1.setReturnTime(LocalTime.parse("22:00:00"));
+
         System.out.println(booking1.toString());
-        //System.out.println(bookingService.countTotalDays(booking1));
 
+        workshopService.testConnection();
 
-        bookingService.openBooking(booking1);
-        bookingService.closeBooking(booking1,18999);
-
-
-
+        */
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.rental.workshop.WorkshopService;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.sql.SQLException;
 import java.time.Duration;
@@ -24,6 +25,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         SpringApplication.run(Main.class, args);
+
 
     /*
         //Create logger later (for remembering)

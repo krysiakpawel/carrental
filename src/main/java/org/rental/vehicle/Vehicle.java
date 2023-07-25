@@ -1,8 +1,5 @@
 package org.rental.vehicle;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 public abstract class Vehicle {
 
 
@@ -13,6 +10,7 @@ public abstract class Vehicle {
     private int mileage;
     private String licenseNumber;
     private int oilInterval = 10000;
+    private boolean oilWasChanged = true;
 
     public Vehicle(String model, String make, String licenseNumber){
         this.id = ++vehicleCount;
@@ -46,8 +44,14 @@ public abstract class Vehicle {
         this.make = make;
     }
 
-     public int getMileage(){
+    public int getMileage(){
         return mileage;
+     }
+     public boolean getOilWasChanged(){
+        return oilWasChanged;
+     }
+     public void setOilWasChanged(boolean oilWasChanged){
+        this.oilWasChanged = oilWasChanged;
      }
 
     public void setMileage(int newMileage) {
@@ -64,8 +68,6 @@ public abstract class Vehicle {
         this.licenseNumber = licenseNumber;
     }
     public String toString(){
-        return "Model: " + getModel() + " " + getMake() + "\n"
-                + "Mileage: " + getMileage() + "\n"
-                + "License number: " + getLicenseNumber();
+        return  getModel() + " " + getMake() + " " + getLicenseNumber();
     }
 }

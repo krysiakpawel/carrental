@@ -1,6 +1,5 @@
 package org.rental.customer;
 
-
 public abstract class Customer {
 
     private String firstName;
@@ -32,7 +31,7 @@ public abstract class Customer {
         this.email = email;
     }
 
-    public void sendEmail() {
-
+    public String toString(){
+        return getFirstName() + " " + getLastName();
     }
 }

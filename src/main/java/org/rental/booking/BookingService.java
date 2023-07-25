@@ -14,7 +14,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.math.*;
 
-
 public class BookingService {
 
     // add try & catch and LOGGER
@@ -42,14 +41,20 @@ public class BookingService {
             booking.setBookingIsRunning(false);
             booking.setBookingIsClosed(true);
             booking.getVehicle().setMileage(Math.max(booking.getStartingMileage(), mileage));
-            if (workshopService.checkIfCarNeedsOil(booking.getVehicle())) {
-                System.out.println("INFO: "+ booking.getVehicle().getMake() + " " + booking.getVehicle().getLicenseNumber() + " needs oil change.");
-                }
             System.out.println("INFO: Booking #" + booking.getBookingNumber() + " has been closed. Customer drove " + (booking.getEndingMileage() - booking.getStartingMileage()) + " km.");
+            if (workshopService.checkIfCarNeedsOil(booking.getVehicle()) || !booking.getVehicle().getOilWasChanged()) {
+                booking.getVehicle().setOilWasChanged(false);
+                System.out.println("INFO: "+ booking.getVehicle().getMake() + " " + booking.getVehicle().getLicenseNumber() + " needs oil change.");
+
+                }
         }
     }
     public Booking createNewBooking(Customer renter, Customer driver) {
-        return new Booking(renter, driver);
+        try {
+            return new Booking(renter, driver);
+        } catch (Exception e) {
+            return null;
+        }
     }
     public void addVehicleToBooking(Booking booking, Vehicle vehicle){
         booking.setVehicle(vehicle);
@@ -62,25 +67,28 @@ public class BookingService {
     }
     public int countTotalDays(Booking booking){
         LocalDateTime pickUpDateTime = LocalDateTime.of(booking.getStartingDate().getYear(), booking.getStartingDate().getMonth(),
-                                                        booking.getStartingDate().getDayOfMonth(), 12, 0,0);
+                                                        booking.getStartingDate().getDayOfMonth(), booking.getStartingTime().getHour(), booking.getStartingTime().getMinute(),0);
         LocalDateTime returnDateTime = LocalDateTime.of(booking.getReturnDate().getYear(), booking.getReturnDate().getMonth(),
-                                                        booking.getReturnDate().getDayOfMonth(), 12, 0, 0);
+                                                        booking.getReturnDate().getDayOfMonth(), booking.getReturnTime().getHour(), booking.getReturnTime().getMinute(), 0);
         return IntMath.divide((int) Duration.between(pickUpDateTime, returnDateTime).toHours(), 24, RoundingMode.CEILING );
     }
 
-    public void modifyPrice(Booking booking, Price price){
-    }
-
     public void modifyDriver(Booking booking, Renter customer){
+        try {
+            booking.setDriver(customer);
+        } catch (Exception e){
+            System.out.println("LOG: Something went wrong when modifying driver");
+        }
     }
-
     public void modifyRenter(Booking booking, Renter customer){
+        try {
+            booking.setRenter(customer);
+        } catch (Exception e ){
+            System.out.println("LOG: Something went wrong when modifying driver");
+        }
     }
 
     public void addExtra(Extras extras){
+
     }
-
-    public void getNumberOfDays(){}
-
-    public void getBookingPrice(){}
 }

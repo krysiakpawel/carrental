@@ -1,6 +1,5 @@
 package org.rental.booking;
 
-
 import org.rental.customer.Customer;
 import org.rental.price.Price;
 import org.rental.vehicle.Vehicle;
@@ -8,10 +7,8 @@ import org.rental.vehicle.Vehicle;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
 public class Booking {
 
-    BookingService bookingService;
     private static int bookingCount;
     private final int bookingNumber;
     private Customer renter;
@@ -23,6 +20,7 @@ public class Booking {
     private LocalTime startingTime;
     private LocalDate returnDate;
     private LocalTime returnTime;
+
     //private LocalDate openingDate;
     private boolean bookingWasOpened;
     private boolean bookingIsClosed;
@@ -49,13 +47,21 @@ public class Booking {
         return renter;
     }
     public void setRenter(Customer renter){
-        this.renter = renter;
+        if(driver != null) {
+            this.renter = renter;
+        } else {
+            System.out.println("Please choose a renter");
+        }
     }
     public Customer getDriver (){
         return driver;
     }
     public void setDriver(Customer driver){
-        this.driver = driver;
+        if(driver != null) {
+            this.driver = driver;
+        } else {
+            System.out.println("Please choose a driver");
+        }
     }
     public Customer getExtraDriver(){
         return extraDriver;
@@ -80,6 +86,19 @@ public class Booking {
     }
     public void setStartingDate(LocalDate startingDate){
         this.startingDate = startingDate;
+    }
+    public LocalTime getStartingTime(){
+        return startingTime;
+    }
+    public void setStartingTime(LocalTime time){
+        this.startingTime =  time;
+    }
+    public LocalTime getReturnTime(){
+        return returnTime;
+    }
+
+    public void setReturnTime(LocalTime time){
+        this.returnTime = time;
     }
     public LocalDate getReturnDate(){
         return returnDate;
@@ -119,21 +138,12 @@ public class Booking {
      }
 
     public String toString(){
-        return "Booking number #" + bookingNumber + "\n" +
-                "Renter: " + renter.getFirstName() + " " + renter.getLastName() + "\n" +
-                "Driver: " + driver.getFirstName() + " " + driver.getLastName() + "\n" +
-                "Vehicle: " + vehicle.getModel() + " " + vehicle.getMake() + " " + vehicle.getLicenseNumber() + "\n" +
-                "Pick-up date: " + getStartingDate() + "\n" +
-                "Return date: " + getReturnDate() + "\n";
+        return "Booking #" + bookingNumber + "\n" +
+                "Renter: " + getRenter() + "\n" +
+                "Driver: " + getDriver() + "\n" +
+                "Vehicle: " + getVehicle() + "\n" +
+                "Pick-up date: " + getStartingDate() + " at " + getStartingTime() + "\n" +
+                "Return date: " + getReturnDate() + " at " + getReturnTime();
 
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
     }
 }

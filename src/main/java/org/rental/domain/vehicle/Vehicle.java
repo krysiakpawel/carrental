@@ -1,6 +1,7 @@
 package org.rental.domain.vehicle;
 
 import jakarta.persistence.*;
+import org.rental.domain.booking.Booking;
 
 
 @Entity
@@ -12,6 +13,7 @@ public class Vehicle {
     private String make;
     private String licenseNumber;
     private int mileage;
+    private Booking booking;
 
     public Vehicle (){}
 
@@ -30,6 +32,16 @@ public class Vehicle {
     }
     public void setId(int id){
         this.id = id;
+    }
+
+
+    @OneToOne(mappedBy = "vehicle")
+    public Booking getBooking(){
+        return booking;
+    }
+
+    public void setBooking(Booking booking){
+        this.booking = booking;
     }
 
     @Column(name = "MODEL")

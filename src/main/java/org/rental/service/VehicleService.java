@@ -16,6 +16,11 @@ public class VehicleService {
             return vehicleDao.save(vehicle);
         }
         return new Vehicle();
-
     }
+     public Vehicle getVehicleByLicenseNumber(String licenseNumber){
+            return vehicleDao.getVehicleByLicenseNumber(licenseNumber);
+     }
+
+
+
 }

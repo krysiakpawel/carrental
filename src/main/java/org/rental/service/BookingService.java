@@ -2,6 +2,7 @@ package org.rental.service;
 
 import org.rental.domain.booking.dao.BookingDao;
 import org.rental.domain.booking.Booking;
+import org.rental.domain.vehicle.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,8 @@ public class BookingService {
 
     @Autowired
     private BookingDao bookingDao;
+    @Autowired
+    private VehicleService vehicleService;
 
     public Booking saveBooking(Booking booking) {
         if (booking != null) {
@@ -18,6 +21,18 @@ public class BookingService {
         } else {
             return new Booking();
         }
+    }
+
+    public Booking getBookingByBookingNumber(Integer bookingNumber){
+        return bookingDao.getBookingByBookingNumber(bookingNumber);
+    }
+
+    public void addVehicle(int bookingNumber, String licenseNumber){
+        Vehicle vehicle = vehicleService.getVehicleByLicenseNumber(licenseNumber);
+        Booking booking = bookingDao.getBookingByBookingNumber(bookingNumber);
+        booking.setVehicle(vehicle);
+        bookingDao.save(booking);
+
     }
 }
 

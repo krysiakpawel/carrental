@@ -3,10 +3,13 @@ package com.rental.domain.customer.renter;
 import com.rental.domain.customer.Customer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Entity
 public class Renter extends Customer {
 
+    private int id;
     private String phoneNumber;
     private String passportNumber;
     private String email;
@@ -16,8 +19,19 @@ public class Renter extends Customer {
         this.phoneNumber = phoneNumber;
         this.passportNumber = passportNumber;
         this.email = email;
-    };
-    public Renter(){};
+    }
+    public Renter(){}
+
+    @Id
+    @GeneratedValue
+    @Column(name = "ID")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Column(name = "PHONE_NUMBER")
     public String getPhoneNumber(){

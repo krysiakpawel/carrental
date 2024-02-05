@@ -8,13 +8,14 @@ import jakarta.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class Customer {
 
-    private Long id;
+    private int id = 0;
     private String name;
     private String lastName;
 
     public Customer(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
+        id ++;
     }
 
     public Customer() {
@@ -23,11 +24,10 @@ public abstract class Customer {
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    public Long getId() {
+    public int getId() {
         return id;
     }
-
-    public void setId(Long id) {
+    private void setId(int id){
         this.id = id;
     }
 

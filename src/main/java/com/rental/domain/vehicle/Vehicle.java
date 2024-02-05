@@ -11,8 +11,6 @@ public class Vehicle {
     private String licenseNumber;
     private int mileage;
 
-    private enum Size {SMALL, MEDIUM, LARGE}
-
     public Vehicle() {
     }
 

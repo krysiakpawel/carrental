@@ -9,7 +9,7 @@ public class VehicleService {
     @Autowired
     private VehicleDao vehicleDao;
 
-    public Vehicle saveVehicle(Vehicle Vehicle) throws Exception {
+    public Vehicle addVehicle(Vehicle Vehicle) throws Exception {
         if (Vehicle == null) {
             throw new Exception("EXCEPTION: There is no vehicle to save.");
         } else {

@@ -15,6 +15,6 @@ public class VehicleController {
 
         @PutMapping(value = "addVehicle")
         public void addVehicle(@RequestBody Vehicle vehicle) throws Exception{
-            vehicleService.saveVehicle(vehicle);
+            vehicleService.addVehicle(vehicle);
         }
 }

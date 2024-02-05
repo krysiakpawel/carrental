@@ -1,6 +1,7 @@
 package com.rental.domain.booking;
 
 import com.rental.domain.customer.Customer;
+import com.rental.domain.customer.driver.Driver;
 import com.rental.domain.customer.renter.Renter;
 import com.rental.domain.price.Price;
 import com.rental.domain.vehicle.Vehicle;
@@ -15,18 +16,16 @@ public class Booking {
 
     private static int bookingCount;
     private int bookingNumber;
-    private Long id;
+    private int id;
     private Vehicle vehicle;
     private Renter renter;
-    private Customer driver;
+    private Driver driver;
     private Price price;
     private LocalDate startingDate;
     private LocalTime startingTime;
     private LocalDate returnDate;
     private LocalTime returnTime;
-    private boolean bookingWasOpened;
-    private boolean bookingIsClosed;
-    private boolean bookingIsRunning;
+    private int bookingStatus;
     private int startingMileage;
     private int endingMileage;
 
@@ -36,18 +35,14 @@ public class Booking {
         this.returnDate = returnDate;
         this.returnTime = returnTime;
         this.bookingNumber = bookingCount++;
-        this.bookingWasOpened = false;
-        this.bookingIsClosed = false;
-        this.bookingIsRunning = false;
+        this.bookingStatus = 1;
         this.startingMileage = 0;
         this.endingMileage = 0;
     }
 
     public Booking() {
         this.bookingNumber = bookingCount++;
-        this.bookingWasOpened = false;
-        this.bookingIsClosed = false;
-        this.bookingIsRunning = false;
+        this.bookingStatus = 1;
         this.startingMileage = 0;
         this.endingMileage = 0;
     }
@@ -55,26 +50,35 @@ public class Booking {
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-
-    @OneToOne(optional = true)
-    @JoinColumn(name = "RENTER_ID", referencedColumnName = "ID")
+    @ManyToOne
+    @JoinColumn(name = "RENTER", referencedColumnName = "ID")
     public Renter getRenter(){
         return renter;
     }
     public void setRenter(Renter renter){
         this.renter = renter;
     }
-   /*
-    @OneToOne(optional = true)
-    @JoinColumn(name = "VEHICLE_ID" , referencedColumnName = "ID")
+
+    @ManyToOne
+    @JoinColumn(name = "DRIVER", referencedColumnName = "ID")
+    public Driver getDriver(){
+        return driver;
+    }
+
+    public void setDriver(Driver driver){
+        this.driver = driver;
+    }
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "VEHICLE" , referencedColumnName = "ID")
     public Vehicle getVehicle(){
         return vehicle;
     }
@@ -82,7 +86,6 @@ public class Booking {
     public void setVehicle(Vehicle vehicle){
         this.vehicle = vehicle;
     }
-    */
 
 
     @Column(name = "BOOKING_NUMBER")
@@ -130,42 +133,20 @@ public class Booking {
         this.returnTime = time;
     }
 
-    @Column(name = "WAS_OPENED")
-    public boolean getBookingWasOpened() {
-        return bookingWasOpened;
+    @Column(name = "STATUS")
+    public int getBookingStatus() {
+        return bookingStatus;
     }
-
-    public void setBookingWasOpened(boolean wasOpened) {
-        this.bookingWasOpened = wasOpened;
+    public void setBookingStatus(int status) {
+        this.bookingStatus = status;
     }
-
-    @Column(name = "IS_CLOSED")
-    public boolean getBookingIsClosed() {
-        return bookingIsClosed;
-    }
-
-    public void setBookingIsClosed(boolean bookingIsClosed) {
-        this.bookingIsClosed = bookingIsClosed;
-    }
-
-    @Column(name = "IS_RUNNING")
-    public boolean getBookingIsRunning() {
-        return bookingIsRunning;
-    }
-
-    public void setBookingIsRunning(boolean bookingIsRunning) {
-        this.bookingIsRunning = bookingIsRunning;
-    }
-
     @Column(name = "STARTING_ODO")
     public int getStartingMileage() {
         return startingMileage;
     }
-
     public void setStartingMileage(int startingMileage) {
         this.startingMileage = startingMileage;
     }
-
     @Column(name = "ENDING_ODO")
     public int getEndingMileage() {
         return endingMileage;

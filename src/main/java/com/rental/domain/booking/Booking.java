@@ -1,14 +1,13 @@
 package com.rental.domain.booking;
 
-import com.rental.domain.customer.Customer;
 import com.rental.domain.customer.driver.Driver;
 import com.rental.domain.customer.renter.Renter;
-import com.rental.domain.price.Price;
 import com.rental.domain.vehicle.Vehicle;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Period;
 
 @Entity
 @Table(name = "BOOKINGS")
@@ -20,7 +19,7 @@ public class Booking {
     private Vehicle vehicle;
     private Renter renter;
     private Driver driver;
-    private Price price;
+    private double price;
     private LocalDate startingDate;
     private LocalTime startingTime;
     private LocalDate returnDate;
@@ -28,6 +27,7 @@ public class Booking {
     private int bookingStatus;
     private int startingMileage;
     private int endingMileage;
+    private int totalDays;
 
     public Booking(LocalDate startingDate, LocalTime startingTime, LocalDate returnDate, LocalTime returnTime) {
         this.startingDate = startingDate;
@@ -38,6 +38,7 @@ public class Booking {
         this.bookingStatus = 1;
         this.startingMileage = 0;
         this.endingMileage = 0;
+        this.totalDays = Period.between(startingDate, returnDate).getDays();
     }
 
     public Booking() {
@@ -60,35 +61,35 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "RENTER", referencedColumnName = "ID")
-    public Renter getRenter(){
+    public Renter getRenter() {
         return renter;
     }
-    public void setRenter(Renter renter){
+
+    public void setRenter(Renter renter) {
         this.renter = renter;
     }
 
     @ManyToOne
     @JoinColumn(name = "DRIVER", referencedColumnName = "ID")
-    public Driver getDriver(){
+    public Driver getDriver() {
         return driver;
     }
 
-    public void setDriver(Driver driver){
+    public void setDriver(Driver driver) {
         this.driver = driver;
     }
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "VEHICLE" , referencedColumnName = "ID")
-    public Vehicle getVehicle(){
+    @ManyToOne
+    @JoinColumn(name = "VEHICLE", referencedColumnName = "ID", nullable = true)
+    public Vehicle getVehicle() {
         return vehicle;
     }
 
-    public void setVehicle(Vehicle vehicle){
+    public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
 
-
-    @Column(name = "BOOKING_NUMBER")
+    @Column(name = "BOOKING_NUMBER", nullable = false)
     public int getBookingNumber() {
         return bookingNumber;
     }
@@ -97,7 +98,7 @@ public class Booking {
         this.bookingNumber = bookingNumber;
     }
 
-    @Column(name = "STARTING_DATE")
+    @Column(name = "STARTING_DATE", nullable = false)
     public LocalDate getStartingDate() {
         return startingDate;
     }
@@ -106,7 +107,7 @@ public class Booking {
         this.startingDate = startingDate;
     }
 
-    @Column(name = "STARTING_TIME")
+    @Column(name = "STARTING_TIME", nullable = false)
     public LocalTime getStartingTime() {
         return startingTime;
     }
@@ -115,7 +116,7 @@ public class Booking {
         this.startingTime = time;
     }
 
-    @Column(name = "RETURN_DATE")
+    @Column(name = "RETURN_DATE", nullable = false)
     public LocalDate getReturnDate() {
         return returnDate;
     }
@@ -124,7 +125,7 @@ public class Booking {
         this.returnDate = returnDate;
     }
 
-    @Column(name = "RETURN_TIME")
+    @Column(name = "RETURN_TIME", nullable = false)
     public LocalTime getReturnTime() {
         return returnTime;
     }
@@ -133,20 +134,24 @@ public class Booking {
         this.returnTime = time;
     }
 
-    @Column(name = "STATUS")
+    @Column(name = "STATUS", nullable = false)
     public int getBookingStatus() {
         return bookingStatus;
     }
+
     public void setBookingStatus(int status) {
         this.bookingStatus = status;
     }
+
     @Column(name = "STARTING_ODO")
     public int getStartingMileage() {
         return startingMileage;
     }
+
     public void setStartingMileage(int startingMileage) {
         this.startingMileage = startingMileage;
     }
+
     @Column(name = "ENDING_ODO")
     public int getEndingMileage() {
         return endingMileage;
@@ -156,10 +161,33 @@ public class Booking {
         this.endingMileage = endingMileage;
     }
 
+    @Column(name = "TOTAL_DAYS")
+    public int getTotalDays() {
+        return totalDays;
+    }
+
+    public void setTotalDays(int days) {
+        this.totalDays = days;
+    }
+
+    @Column(name = "PRICE")
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public String toString() {
         return "Booking #" + bookingNumber + "\n" +
-                "Pick-up date: " + getStartingDate() + " at " + getStartingTime() + "\n" +
-                "Return date: " + getReturnDate() + " at " + getReturnTime();
+                "Pick-up date: " + getStartingDate() + " at " + getStartingTime() + ",\n" +
+                "Return date: " + getReturnDate() + " at " + getReturnTime() + ",\n" +
+                "Renter: " + getRenter().getName() + " " + getRenter().getLastName() + ",\n" +
+                "Driver: " + getDriver().getName() + " " + getDriver().getLastName() + ",\n" +
+                "Vehicle: " + getVehicle().getModel() + " " + getVehicle().getMake() + " " + getVehicle().getLicenseNumber() + ",\n" +
+                "Price per day: " + getVehicle().getPricePerDay() + ",\n" +
+                "Total price: " + getPrice() + ".\n";
 
     }
 }

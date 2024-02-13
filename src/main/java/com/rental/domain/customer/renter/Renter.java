@@ -41,7 +41,7 @@ public class Renter extends Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    @Column(name = "PASSPORT")
+    @Column(name = "PASSPORT", unique = true)
     public String getPassportNumber(){
         return passportNumber;
     }
@@ -57,7 +57,11 @@ public class Renter extends Customer {
     public void setEmail(String email){
         this.email = email;
     }
+
+    public String toString(){
+        return "Renter: " + super.toString() + "\n" +
+                "Passport: " + getPassportNumber() + "\n" +
+                "Phone numebr: " + getPhoneNumber() + "\n" +
+                "E-mail: " + getEmail() + "\n";
+    }
 }
-
-
-

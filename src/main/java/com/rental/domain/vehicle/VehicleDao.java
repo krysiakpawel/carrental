@@ -9,10 +9,14 @@ import java.util.ArrayList;
 
 @Transactional
 @Repository
-public interface VehicleDao extends CrudRepository <Vehicle, Integer> {
+public interface VehicleDao extends CrudRepository<Vehicle, Integer> {
 
 
     Vehicle getVehicleByLicenseNumber(String licenseNumber);
 
-    ArrayList<Vehicle> getVehicleByModel(String model);
+    ArrayList<Vehicle> findAllByMake(String model);
+
+    ArrayList<Vehicle> findAll();
+
+    void deleteByLicenseNumber(String licenseNumber);
 }

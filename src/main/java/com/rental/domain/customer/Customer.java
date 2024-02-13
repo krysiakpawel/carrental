@@ -15,7 +15,7 @@ public abstract class Customer {
     public Customer(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
-        id ++;
+        id++;
     }
 
     public Customer() {
@@ -27,7 +27,8 @@ public abstract class Customer {
     public int getId() {
         return id;
     }
-    private void setId(int id){
+
+    private void setId(int id) {
         this.id = id;
     }
 
